@@ -2,6 +2,7 @@ package com.dev.fernandogoia.meuprimeiroappandroid
 
 import android.os.Bundle
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -14,6 +15,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        Toast.makeText(this, "Meu primeiro Toast", Toast.LENGTH_SHORT).show()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
@@ -30,13 +33,9 @@ class MainActivity : AppCompatActivity() {
             textAlignment = TextView.TEXT_ALIGNMENT_CENTER
         }
 
-        supportFragmentManager.beginTransaction()
-            .add(
-                R.id.flMainContainer,
-                BlankFragment.newInstance(
-                    name = "Hello Kotlin",
-                    age = 100,
-                    isMale = true
+        supportFragmentManager.beginTransaction().add(
+                R.id.flMainContainer, BlankFragment.newInstance(
+                    name = "Hello Kotlin", age = 100, isMale = true
                 )
             ).commit()
 

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import com.dev.fernandogoia.meuprimeiroappandroid.databinding.FragmentBlankBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,6 +25,16 @@ class BlankFragment : Fragment() {
     private var param2: Int? = null
     private var param3: Boolean? = null
 
+    private var _binding: FragmentBlankBinding? = null
+
+    // This property is only valid between onCreateView and onDestroyView.
+    private val binding get() = _binding!!
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -36,22 +47,21 @@ class BlankFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_blank, container, false)
+    ): View {
+        _binding = FragmentBlankBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val tvFragmentContent = view.findViewById<TextView>(R.id.tvFragmentContent)
-        tvFragmentContent.text = """
-            
-            Nome: $param1
-            Idade: $param2
-            É homem: ${if (param3 == true) "Sim" else "Não"}
-            
-        """.trimIndent()
+        binding.tvFragmentContent.text = getString(
+            R.string.nome_idade_homem,
+            param1,
+            param2,
+            if (param3 == true) "Sim" else "Não"
+        ).trimIndent()
     }
 
     companion object {

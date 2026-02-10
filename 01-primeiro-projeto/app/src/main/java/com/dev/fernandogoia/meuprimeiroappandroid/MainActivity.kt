@@ -25,9 +25,21 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        with(binding.tvHelloWorld){
-            text = "Teste"
+        with(binding.tvHelloWorld) {
+            text = context.getString(R.string.test)
             textAlignment = TextView.TEXT_ALIGNMENT_CENTER
         }
+
+        supportFragmentManager.beginTransaction()
+            .add(
+                R.id.flMainContainer,
+                BlankFragment.newInstance(
+                    name = "Hello Kotlin",
+                    age = 100,
+                    isMale = true
+                )
+            ).commit()
+
+
     }
 }

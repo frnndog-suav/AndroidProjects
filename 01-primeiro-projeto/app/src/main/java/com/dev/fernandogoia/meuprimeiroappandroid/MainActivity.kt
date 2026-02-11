@@ -1,5 +1,6 @@
 package com.dev.fernandogoia.meuprimeiroappandroid
 
+import android.content.IntentFilter
 import android.os.Bundle
 import android.widget.TextView
 import android.widget.Toast
@@ -7,10 +8,14 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.dev.fernandogoia.meuprimeiroappandroid.broadcastreceiver.LowBatterBroadcastReceiver
 import com.dev.fernandogoia.meuprimeiroappandroid.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
+
+    private val lowBatterBroadcastReceiver = LowBatterBroadcastReceiver()
+    private val lowBatterIntentFilter = IntentFilter("android.intent.action.BATTERY_LOW")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,11 +39,17 @@ class MainActivity : AppCompatActivity() {
         }
 
         supportFragmentManager.beginTransaction().add(
-                R.id.flMainContainer, BlankFragment.newInstance(
-                    name = "Hello Kotlin", age = 100, isMale = true
-                )
-            ).commit()
+            R.id.flMainContainer, BlankFragment.newInstance(
+                name = "Hello Kotlin", age = 100, isMale = true
+            )
+        ).commit()
 
+        registerReceiver(lowBatterBroadcastReceiver, lowBatterIntentFilter)
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(lowBatterBroadcastReceiver)
     }
 }

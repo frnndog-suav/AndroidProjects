@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MeuPrimeiroAppAndroid">
 
+        <service
+            android:name=".service.SyncDataService"
+            android:foregroundServiceType="dataSync" />
+
         <receiver
             android:name=".broadcastreceiver.LowBatterBroadcastReceiver"
             android:exported="false">

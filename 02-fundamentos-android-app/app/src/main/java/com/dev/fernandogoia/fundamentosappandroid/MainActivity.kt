@@ -2,16 +2,22 @@ package com.dev.fernandogoia.fundamentosappandroid
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.NavHostFragment
 import com.dev.fernandogoia.fundamentosappandroid.databinding.ActivityMainBinding
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+
 
     private val navController by lazy {
         val navHostFragment =
@@ -23,6 +29,18 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val viewModel: DiceViewModel by viewModels()
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect {
+                    // Update UI elements
+
+                    binding.tvRolledDice.text = it.rolledDieValue?.toString()
+
+                }
+            }
+        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -38,7 +56,8 @@ class MainActivity : AppCompatActivity() {
                 when (it) {
                     R.id.firstFragment -> {
                         binding.btnNextFragment.text = "Voltar para primeiro framgment"
-                        navController?.navigate(R.id.action_firstFragment_to_secondFragment,
+                        navController?.navigate(
+                            R.id.action_firstFragment_to_secondFragment,
                             bundleOf("first_arg" to arrayOf("1", "2", "3"))
                         )
                     }
@@ -49,9 +68,9 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-
-
         }
+
+        binding.btnRollDice.setOnClickListener { viewModel.rollDice() }
 
     }
 

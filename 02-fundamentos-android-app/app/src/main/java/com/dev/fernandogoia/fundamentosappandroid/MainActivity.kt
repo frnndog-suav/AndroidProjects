@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
+    private val viewModel: DiceViewModel by viewModels()
 
     private val navController by lazy {
         val navHostFragment =
@@ -26,11 +26,19 @@ class MainActivity : AppCompatActivity() {
         navHostFragment?.navController
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        viewModel.uiStateLiveData.observe(this@MainActivity) { uiState ->
+            uiState.rolledDice1ImgRes?.let { imgRes ->
+                binding.ivRolledDice1.setImageResource(imgRes)
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
-        val viewModel: DiceViewModel by viewModels()
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -62,15 +70,15 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnRollDice.setOnClickListener { viewModel.rollDice() }
 
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collect { uiState ->
-                    uiState.rolledDice1ImgRes?.let { imgRes ->
-                        binding.ivRolledDice1.setImageResource(imgRes)
-                    }
-                }
-            }
-        }
+//        lifecycleScope.launch {
+//            repeatOnLifecycle(Lifecycle.State.STARTED) {
+//                viewModel.uiState.collect { uiState ->
+//                    uiState.rolledDice1ImgRes?.let { imgRes ->
+//                        binding.ivRolledDice1.setImageResource(imgRes)
+//                    }
+//                }
+//            }
+//        }
     }
 
 

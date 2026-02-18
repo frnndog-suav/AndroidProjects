@@ -1,6 +1,8 @@
 package com.dev.fernandogoia.fundamentosappandroid
 
 import androidx.annotation.DrawableRes
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,6 +23,9 @@ class DiceViewModel : ViewModel() {
     private val _uiState = MutableStateFlow(DiceUiState())
     val uiState: StateFlow<DiceUiState> = _uiState.asStateFlow()
 
+    private val _uiStateLiveData = MutableLiveData(DiceUiState())
+    val uiStateLiveData: LiveData<DiceUiState> = _uiStateLiveData
+
     // Handle business logic
     fun rollDice() {
         _uiState.update { currentState ->
@@ -31,6 +36,13 @@ class DiceViewModel : ViewModel() {
                 numberOfRolls = currentState.numberOfRolls + 1,
             )
         }
+
+        _uiStateLiveData.value = DiceUiState(
+            rolledDice1ImgRes = getDiceImageResource(Random.nextInt(from = 1, until = 7)),
+            rolledDice2ImgRes = getDiceImageResource(Random.nextInt(from = 1, until = 7)),
+            rolledDice3ImgRes = getDiceImageResource(Random.nextInt(from = 1, until = 7)),
+            numberOfRolls = (_uiStateLiveData.value?.numberOfRolls ?: 0) + 1,
+        )
     }
 
     private fun getDiceImageResource(diceValue: Int): Int {

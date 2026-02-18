@@ -22,10 +22,10 @@ class SecondFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         val view = binding.root
-        return inflater.inflate(R.layout.fragment_second, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,11 +36,10 @@ class SecondFragment : Fragment() {
         Log.d("SecondFragment", "Argument ${firstArgument.joinToString()}")
 
         lifecycleScope.launch {
-            viewModel.uiState.collect {
-                // Update UI elements
-
-                binding.tvSecondFragment.text = it.rolledDieValue?.toString()
-
+            viewModel.uiState.collect { uiState ->
+                uiState.rolledDice3ImgRes?.let { imgRes ->
+                    binding.ivRolledDice3.setImageResource(imgRes)
+                }
             }
         }
     }

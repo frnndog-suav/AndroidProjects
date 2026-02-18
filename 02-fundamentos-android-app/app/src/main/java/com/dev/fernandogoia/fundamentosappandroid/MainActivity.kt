@@ -31,16 +31,6 @@ class MainActivity : AppCompatActivity() {
         enableEdgeToEdge()
 
         val viewModel: DiceViewModel by viewModels()
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.uiState.collect {
-                    // Update UI elements
-
-                    binding.tvRolledDice.text = it.rolledDieValue?.toString()
-
-                }
-            }
-        }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
@@ -72,6 +62,15 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnRollDice.setOnClickListener { viewModel.rollDice() }
 
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.uiState.collect { uiState ->
+                    uiState.rolledDice1ImgRes?.let { imgRes ->
+                        binding.ivRolledDice1.setImageResource(imgRes)
+                    }
+                }
+            }
+        }
     }
 
 

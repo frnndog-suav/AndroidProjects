@@ -7,4 +7,8 @@
     <string name="jogar_dado">Jogar dados</string>
     <string name="ir_para_pr_xima_tela">Ver próximo dado</string>
     <string name="cone_de_um_dado">Ícone de um dado</string>
+    <string name="icone_de_um_dado">Ícone de um dado</string>
+    <string name="dado_1">Dado 1</string>
+    <string name="dado_2">Dado 2</string>
+    <string name="dado_3">Dado 3</string>
 </resources>

@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                         binding.btnNextFragment.text = "Ir para próxima tela"
                         navController?.popBackStack()
                     }
-                    
+
                 }
             }
         }

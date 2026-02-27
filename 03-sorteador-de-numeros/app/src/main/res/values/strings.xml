@@ -4,6 +4,7 @@
     <string name="imagem_logo">Imagem logo</string>
     <string name="sorteador_de_n_meros">SORTEADOR DE NÚMEROS</string>
     <string name="sortear">Sortear</string>
+    <string name="sortear_novamente">Sortear Novamente</string>
     <string name="como_funciona_o_sorteador_de_n_meros">Como funciona o sorteador de números?</string>
     <string name="sorteador_utiliza_conteudo">O sorteador utiliza um algoritmo de geração aleatória para criar números dentro do intervalo especificado pelo usuário.</string>
     <string name="posso_escolher_o_intervalo_dos_n_meros">Posso escolher o intervalo dos números?</string>
@@ -17,5 +18,5 @@
     <string name="at">ATÉ</string>
     <string name="n_o_repetir_n_meros">Não repetir números</string>
     <string name="resultado_do_sorteio">RESULTADO DO SORTEIO</string>
-    <string name="primeiro_resultado">1º RESULTADO</string>
+    <string name="numero_do_sorteio">%1$sº RESULTADO</string>
 </resources>

@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvInfoContent"
+        android:id="@+id/tvDrawNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sortear_descricao"
@@ -36,7 +36,7 @@
         android:weightSum="3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvInfoContent">
+        app:layout_constraintTop_toBottomOf="@+id/tvDrawNumber">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -57,12 +57,13 @@
                 android:layout_height="8dp" />
 
             <EditText
+                android:id="@+id/etAmountNumbers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_edittext"
                 android:inputType="number"
                 android:padding="16dp"
-                android:text="123"
+                android:text="2"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.Sora.DisplaySmall"
                 android:textColor="@color/white" />
@@ -92,12 +93,13 @@
                 android:layout_height="8dp" />
 
             <EditText
+                android:id="@+id/etFromLimit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_edittext"
                 android:inputType="number"
                 android:padding="16dp"
-                android:text="123"
+                android:text="1"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.Sora.DisplaySmall"
                 android:textColor="@color/white" />
@@ -127,12 +129,13 @@
                 android:layout_height="8dp" />
 
             <EditText
+                android:id="@+id/etFinalLimit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_edittext"
                 android:inputType="number"
                 android:padding="16dp"
-                android:text="123"
+                android:text="100"
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.Sora.DisplaySmall"
                 android:textColor="@color/white" />

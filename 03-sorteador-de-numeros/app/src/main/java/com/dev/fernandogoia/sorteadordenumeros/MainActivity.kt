@@ -2,6 +2,7 @@ package com.dev.fernandogoia.sorteadordenumeros
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
@@ -10,6 +11,8 @@ import androidx.navigation.fragment.NavHostFragment
 import com.dev.fernandogoia.sorteadordenumeros.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
+
+    private val viewModel: SorteioViewModel by viewModels()
 
     private lateinit var binding: ActivityMainBinding
 
@@ -47,6 +50,8 @@ class MainActivity : AppCompatActivity() {
                                 ), null
                             )
                         }
+
+                        viewModel.drawNumbers()
                     }
 
                     getString(R.string.sortear_novamente) -> {

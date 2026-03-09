@@ -1,11 +1,14 @@
 package com.fernandogoia
 
-import CurrencyTypeResult
-import currencyTypes
+import model.CurrencyTypeResult
+import model.currencyTypes
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import model.ExchangeRateResult
+import model.exchangeRates
+import model.orUnknown
 
 fun Application.configureRouting() {
     routing {
@@ -27,9 +30,14 @@ fun Application.configureRouting() {
                 text = "Não foi possível obter o acrônimo da moeda atual."
             )
 
-
+            call.respond(
+                ExchangeRateResult(
+                    from = from.orUnknown(),
+                    to = to.orUnknown(),
+                    exchangeRate = exchangeRates[from]?.get(to) ?: 0.0
+                )
+            )
         }
-
 
     }
 }
